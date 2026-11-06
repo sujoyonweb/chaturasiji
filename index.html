@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="hi" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#000000" id="metaThemeColor">
+  <title>Shri Hit Chaturasi</title>
+  <link rel="shortcut icon" href="icon.svg" type="image/x-icon">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;600&family=Noto+Serif+Devanagari:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.json">
+</head>
+<body>
+
+  <!-- Top Navigation -->
+  <header id="appHeader" class="ui-element">
+    <div class="ui-container">
+      <div class="app-title" id="appTitle">श्रीहित चौरासी</div>
+      
+      <div class="header-actions">
+        <button id="gridBtn" class="icon-btn" aria-label="Open Grid">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+        </button>
+        <!-- View Bookmarks List (Ribbon Icon) -->
+        <button id="filterBtn" class="icon-btn" aria-label="Toggle Bookmarks">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
+        </button>
+        
+        <!-- Save Current Pad (Heart Icon) -->
+        <button id="likeBtn" class="icon-btn" aria-label="Like Pad">
+          <svg id="headerHeartIcon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+        </button>
+
+        <!-- Settings -->
+        <button id="settingsBtn" class="icon-btn" aria-label="Settings">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Slider Viewport -->
+  <main id="sliderViewport">
+    <div id="cardTrack" class="card-track"></div>
+  </main>
+
+  <!-- Scrub Bar Navigation -->
+  <footer id="appFooter" class="ui-element">
+    <div class="ui-container">
+      <div class="scrub-container" id="scrubContainer">
+        <div class="scrub-track">
+          <div class="scrub-thumb" id="scrubThumb"></div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Grid Modal -->
+  <div id="gridOverlay" class="overlay"></div>
+  <aside id="gridModal" class="settings-modal grid-modal">
+    <div class="modal-handle"></div>
+    <div class="modal-header">
+      <h2 class="modal-title">Table of Contents</h2>
+      <button id="closeGridBtn" class="icon-btn" aria-label="Close">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+    </div>
+    <div class="pad-grid" id="padGrid"></div>
+  </aside>
+
+  <!-- Settings Modal -->
+  <div id="settingsOverlay" class="overlay"></div>
+  <aside id="settingsModal" class="settings-modal">
+    <div class="modal-handle"></div>
+    <h2 class="modal-title">Settings</h2>
+    
+    <div class="settings-group">
+      <label>Language</label>
+      <div class="segmented-control" id="langControl">
+        <button class="segment-btn active" data-lang="hi">हिन्दी</button>
+        <button class="segment-btn" data-lang="en">English</button>
+        <button class="segment-btn" data-lang="bn">বাংলা</button>
+      </div>
+    </div>
+
+    <div class="settings-group">
+      <label>Theme</label>
+      <div class="segmented-control" id="themeControl">
+        <button class="segment-btn active" data-theme="dark">OLED Black</button>
+        <button class="segment-btn" data-theme="light">Parchment</button>
+      </div>
+    </div>
+
+    <div class="settings-group">
+      <label>Text Size</label>
+      <div class="size-controls">
+        <button id="btnSizeDec" class="icon-btn">A-</button>
+        <span id="sizeIndicator">100%</span>
+        <button id="btnSizeInc" class="icon-btn">A+</button>
+      </div>
+    </div>
+
+    <div class="settings-group toggle-group">
+      <label for="blurToggle">Memorization Mode</label>
+      <input type="checkbox" id="blurToggle" class="toggle-switch">
+    </div>
+
+    <a href="https://yourwebsite.com/donate" target="_blank" class="donate-btn">Support the App</a>
+  </aside>
+
+  <!-- Heart Animation Template -->
+  <svg id="heartAnim" class="heart-anim" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('sw.js')
+          .then(reg => console.log('Service Worker registered!'))
+          .catch(err => console.error('Service Worker registration failed:', err));
+      });
+    }
+  </script>
+</body>
+</html>
